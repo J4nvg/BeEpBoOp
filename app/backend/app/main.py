@@ -2,8 +2,8 @@ from app.models import ComputerParts, Storage, CPU, Memory, Motherboard, Cooler,
 import sqlalchemy as db
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
-from db.models import *
-from db.database import SessionLocal
+from app.db.models import *
+from app.db.database import SessionLocal
 
 app = FastAPI()
 
