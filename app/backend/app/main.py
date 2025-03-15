@@ -14,7 +14,7 @@ def root():
 
 @app.get("/cpu", response_model=ComputerParts)
 def cpu():
-    return {"name": "CPU", "data": []}
+    return {"message": "CPU", "data": []}
 
 
 @app.get("/cpu/{cpu_id}", response_model=CPU)
