@@ -1,2 +1,5 @@
 ### Ignore everything that is useless
 __pycache__
+
+# Because of MacOS:
+.DS_store

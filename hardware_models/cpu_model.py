@@ -3,6 +3,7 @@ class CPU():
                 brand: str,
                 series: str,
                 model: str,
+                socket: str,
                 speed: float,
                 clock_speed: float,
                 cores: int,
@@ -12,13 +13,14 @@ class CPU():
         self.brand = brand
         self.series = series
         self.model = model
+        self.socket = socket
         self.speed = speed
         self.clock_speed = clock_speed
         self.cores = cores
         self.integrated_graphics = integrated_graphics
         self.ean_number = ean_number
         self.vendor_code = vendor_code
-    
+        
     def serialize(self):
         return {
             'brand': self.brand,
