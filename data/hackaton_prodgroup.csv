@@ -1,0 +1,156 @@
+﻿brandId;brandName;mainGroup;mainGroupName;subGroup;subGroupName
+74;Intel;1;SSD (Solid State Drive);1;"SSD 2.5"" SATA"
+90;Western Digital;1;SSD (Solid State Drive);1;"SSD 2.5"" SATA"
+20;Samsung;1;SSD (Solid State Drive);1;"SSD 2.5"" SATA"
+220;Transcend;1;SSD (Solid State Drive);1;"SSD 2.5"" SATA"
+9350;Kioxia;1;SSD (Solid State Drive);1;"SSD 2.5"" SATA"
+74;Intel;2;Netwerk bedraad;3;Ethernetkaart
+52;HP;2;Netwerk bedraad;3;Ethernetkaart
+369;Startech;2;Netwerk bedraad;3;Ethernetkaart
+323;DeLock;2;Netwerk bedraad;3;Ethernetkaart
+275;QNAP;2;Netwerk bedraad;3;Ethernetkaart
+209;TP-LINK;3;Netwerk draadloos;11;Wi-Fi PCI-E kaart
+63;ASUS;3;Netwerk draadloos;11;Wi-Fi PCI-E kaart
+88;Gigabyte;3;Netwerk draadloos;11;Wi-Fi PCI-E kaart
+369;Startech;3;Netwerk draadloos;11;Wi-Fi PCI-E kaart
+665;Logilink;3;Netwerk draadloos;11;Wi-Fi PCI-E kaart
+12;Akasa;4;Cardreader;1;Cardreader intern
+323;DeLock;4;Cardreader;1;Cardreader intern
+51;Gembird;4;Cardreader;1;Cardreader intern
+54;ICY BOX;4;Cardreader;1;Cardreader intern
+369;Startech;4;Cardreader;1;Cardreader intern
+90;Western Digital;5;Hard Disks;4;"Hard disks 3,5"""
+6;Seagate;5;Hard Disks;4;"Hard disks 3,5"""
+86;Toshiba;5;Hard Disks;4;"Hard disks 3,5"""
+338;Lenovo;5;Hard Disks;4;"Hard disks 3,5"""
+233;Synology;5;Hard Disks;4;"Hard disks 3,5"""
+64;ASRock;7;Moederborden;1;Moederborden CPU Onboard
+63;ASUS;7;Moederborden;1;Moederborden CPU Onboard
+74;Intel;7;Moederborden;1;Moederborden CPU Onboard
+88;Gigabyte;7;Moederborden;1;Moederborden CPU Onboard
+63;ASUS;7;Moederborden;15;Intel Socket 1151 Moederborden
+64;ASRock;7;Moederborden;15;Intel Socket 1151 Moederborden
+88;Gigabyte;7;Moederborden;15;Intel Socket 1151 Moederborden
+74;Intel;7;Moederborden;15;Intel Socket 1151 Moederborden
+63;ASUS;7;Moederborden;19;AMD Socket AM4 Moederborden
+64;ASRock;7;Moederborden;19;AMD Socket AM4 Moederborden
+88;Gigabyte;7;Moederborden;19;AMD Socket AM4 Moederborden
+61;MSI;7;Moederborden;19;AMD Socket AM4 Moederborden
+224;Biostar;7;Moederborden;19;AMD Socket AM4 Moederborden
+63;ASUS;7;Moederborden;20;Intel Socket 2066 Moederborden
+64;ASRock;7;Moederborden;20;Intel Socket 2066 Moederborden
+63;ASUS;7;Moederborden;27;Intel Socket 1200 Moederborden
+64;ASRock;7;Moederborden;27;Intel Socket 1200 Moederborden
+88;Gigabyte;7;Moederborden;27;Intel Socket 1200 Moederborden
+61;MSI;7;Moederborden;27;Intel Socket 1200 Moederborden
+63;ASUS;7;Moederborden;28;AMD Socket sWRX8 Moederborden
+64;ASRock;7;Moederborden;28;AMD Socket sWRX8 Moederborden
+88;Gigabyte;7;Moederborden;28;AMD Socket sWRX8 Moederborden
+63;ASUS;7;Moederborden;29;Intel Socket 1700 Moederborden
+88;Gigabyte;7;Moederborden;29;Intel Socket 1700 Moederborden
+64;ASRock;7;Moederborden;29;Intel Socket 1700 Moederborden
+61;MSI;7;Moederborden;29;Intel Socket 1700 Moederborden
+135;NZXT;7;Moederborden;29;Intel Socket 1700 Moederborden
+63;ASUS;7;Moederborden;30;AMD Socket AM5 Moederborden
+88;Gigabyte;7;Moederborden;30;AMD Socket AM5 Moederborden
+64;ASRock;7;Moederborden;30;AMD Socket AM5 Moederborden
+61;MSI;7;Moederborden;30;AMD Socket AM5 Moederborden
+135;NZXT;7;Moederborden;30;AMD Socket AM5 Moederborden
+63;ASUS;7;Moederborden;31;AMD Socket sTR5 Moederborden
+64;ASRock;7;Moederborden;31;AMD Socket sTR5 Moederborden
+88;Gigabyte;7;Moederborden;31;AMD Socket sTR5 Moederborden
+64;ASRock;7;Moederborden;32;Intel Socket 1851 Moederborden
+88;Gigabyte;7;Moederborden;32;Intel Socket 1851 Moederborden
+63;ASUS;7;Moederborden;32;Intel Socket 1851 Moederborden
+61;MSI;7;Moederborden;32;Intel Socket 1851 Moederborden
+135;NZXT;7;Moederborden;32;Intel Socket 1851 Moederborden
+57;Kingston;8;Geheugen;7;DDR3 Geheugen
+443;G.Skill;8;Geheugen;7;DDR3 Geheugen
+167;Corsair;8;Geheugen;7;DDR3 Geheugen
+4174;Dataram;8;Geheugen;7;DDR3 Geheugen
+863;V7;8;Geheugen;7;DDR3 Geheugen
+443;G.Skill;8;Geheugen;8;DDR4 Geheugen
+57;Kingston;8;Geheugen;8;DDR4 Geheugen
+167;Corsair;8;Geheugen;8;DDR4 Geheugen
+220;Transcend;8;Geheugen;8;DDR4 Geheugen
+4174;Dataram;8;Geheugen;8;DDR4 Geheugen
+57;Kingston;8;Geheugen;14;SO-DIMM DDR3 Geheugen
+443;G.Skill;8;Geheugen;14;SO-DIMM DDR3 Geheugen
+167;Corsair;8;Geheugen;14;SO-DIMM DDR3 Geheugen
+863;V7;8;Geheugen;14;SO-DIMM DDR3 Geheugen
+275;QNAP;8;Geheugen;14;SO-DIMM DDR3 Geheugen
+57;Kingston;8;Geheugen;15;SO-DIMM DDR4 Geheugen
+443;G.Skill;8;Geheugen;15;SO-DIMM DDR4 Geheugen
+167;Corsair;8;Geheugen;15;SO-DIMM DDR4 Geheugen
+220;Transcend;8;Geheugen;15;SO-DIMM DDR4 Geheugen
+273;Crucial;8;Geheugen;15;SO-DIMM DDR4 Geheugen
+57;Kingston;8;Geheugen;18;DDR5 Geheugen
+443;G.Skill;8;Geheugen;18;DDR5 Geheugen
+167;Corsair;8;Geheugen;18;DDR5 Geheugen
+2515;Patriot;8;Geheugen;18;DDR5 Geheugen
+201;Team Group Inc.;8;Geheugen;18;DDR5 Geheugen
+57;Kingston;8;Geheugen;19;SO-DIMM DDR5 Geheugen
+273;Crucial;8;Geheugen;19;SO-DIMM DDR5 Geheugen
+443;G.Skill;8;Geheugen;19;SO-DIMM DDR5 Geheugen
+167;Corsair;8;Geheugen;19;SO-DIMM DDR5 Geheugen
+220;Transcend;8;Geheugen;19;SO-DIMM DDR5 Geheugen
+256;Noctua;10;Koeling (lucht);2;CPU Luchtkoeling
+332;Deepcool;10;Koeling (lucht);2;CPU Luchtkoeling
+12;Akasa;10;Koeling (lucht);2;CPU Luchtkoeling
+199;Thermalright;10;Koeling (lucht);2;CPU Luchtkoeling
+1861;Inter Tech;10;Koeling (lucht);2;CPU Luchtkoeling
+167;Corsair;10;Koeling (lucht);11;Case fans
+32;Thermaltake;10;Koeling (lucht);11;Case fans
+256;Noctua;10;Koeling (lucht);11;Case fans
+173;Lian-Li;10;Koeling (lucht);11;Case fans
+207;Be quiet!;10;Koeling (lucht);11;Case fans
+74;Intel;18;Processoren;11;Socket 1151 Processoren
+73;AMD;18;Processoren;19;Socket AM4 Processoren
+74;Intel;18;Processoren;31;Socket 1200 Processoren
+73;AMD;18;Processoren;32;Socket sWRX8 Processoren
+74;Intel;18;Processoren;33;Socket 1700 Processoren
+73;AMD;18;Processoren;34;Socket AM5 Processoren
+73;AMD;18;Processoren;35;Socket sTR5 Processoren
+74;Intel;18;Processoren;36;Socket 1851 Processoren
+64;ASRock;20;Videokaarten;2;AMD Videokaarten
+88;Gigabyte;20;Videokaarten;2;AMD Videokaarten
+122;XFX;20;Videokaarten;2;AMD Videokaarten
+89;Sapphire;20;Videokaarten;2;AMD Videokaarten
+260;Powercolor;20;Videokaarten;2;AMD Videokaarten
+88;Gigabyte;20;Videokaarten;3;Nvidia Videokaarten
+63;ASUS;20;Videokaarten;3;Nvidia Videokaarten
+61;MSI;20;Videokaarten;3;Nvidia Videokaarten
+1853;INNO3D;20;Videokaarten;3;Nvidia Videokaarten
+244;Zotac;20;Videokaarten;3;Nvidia Videokaarten
+216;Sparkle;20;Videokaarten;23;Intel Videokaarten
+64;ASRock;20;Videokaarten;23;Intel Videokaarten
+11;Acer;20;Videokaarten;23;Intel Videokaarten
+74;Intel;20;Videokaarten;23;Intel Videokaarten
+24;Cooler Master;21;Voedingen;1;PC Voedingen (PSU)
+32;Thermaltake;21;Voedingen;1;PC Voedingen (PSU)
+167;Corsair;21;Voedingen;1;PC Voedingen (PSU)
+854;Chieftec;21;Voedingen;1;PC Voedingen (PSU)
+207;Be quiet!;21;Voedingen;1;PC Voedingen (PSU)
+52;HP;21;Voedingen;12;Server voedingen
+233;Synology;21;Voedingen;12;Server voedingen
+234;APC;21;Voedingen;12;Server voedingen
+330;Dell;21;Voedingen;12;Server voedingen
+275;QNAP;21;Voedingen;12;Server voedingen
+32;Thermaltake;24;Behuizingen;2;PC Behuizingen
+259;Fractal Design;24;Behuizingen;2;PC Behuizingen
+111;Aerocool;24;Behuizingen;2;PC Behuizingen
+167;Corsair;24;Behuizingen;2;PC Behuizingen
+24;Cooler Master;24;Behuizingen;2;PC Behuizingen
+1861;Inter Tech;24;Behuizingen;5;"19"" Rackmount Behuizingen"
+104;Silverstone;24;Behuizingen;5;"19"" Rackmount Behuizingen"
+426;Fantec;24;Behuizingen;5;"19"" Rackmount Behuizingen"
+1983;Lanberg;24;Behuizingen;5;"19"" Rackmount Behuizingen"
+51;Gembird;24;Behuizingen;5;"19"" Rackmount Behuizingen"
+62;Microsoft;27;Software;1;Microsoft Besturingssysteem
+330;Dell;27;Software;1;Microsoft Besturingssysteem
+338;Lenovo;27;Software;1;Microsoft Besturingssysteem
+32;Thermaltake;42;Koeling (water);8;All-in-one waterkoeling
+167;Corsair;42;Koeling (water);8;All-in-one waterkoeling
+63;ASUS;42;Koeling (water);8;All-in-one waterkoeling
+332;Deepcool;42;Koeling (water);8;All-in-one waterkoeling
+135;NZXT;42;Koeling (water);8;All-in-one waterkoeling
