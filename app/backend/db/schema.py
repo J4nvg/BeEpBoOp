@@ -124,10 +124,5 @@ class PSU(Base):
     # Powers -> EVERYTHING
     power = Column(Integer)
 
-
 # Create the table
 Base.metadata.create_all(engine)
-
-# Create a session
-Session = sessionmaker(bind=engine)
-session = Session()
