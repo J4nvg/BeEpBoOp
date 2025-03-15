@@ -12,7 +12,8 @@
             "extensions": [
                 "ms-python.python",
                 "esbenp.prettier-vscode",
-                "tamasfe.even-better-toml"
+                "tamasfe.even-better-toml",
+                "qwtel.sqlite-viewer",
             ]
         }
     },

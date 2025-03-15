@@ -6,6 +6,7 @@ from fastapi import FastAPI
 app = FastAPI()
 
 
+
 @app.get("/")
 def root():
     return {"Hello": "World"}
@@ -14,7 +15,7 @@ def root():
 
 @app.get("/cpu", response_model=ComputerParts)
 def cpu():
-    return {"name": "CPU", "data": []}
+    return {"message": "CPU", "data": []}
 
 
 @app.get("/cpu/{cpu_id}", response_model=CPU)
@@ -24,7 +25,7 @@ def cpu(cpu_id: int):
 
 @app.get("/memory", response_model=ComputerParts)
 def memory():
-    return {"name": "Memory", "data": []}
+    return {"message": "Memory", "data": []}
 
 
 @app.get("/memory/{memory_id}", response_model=Memory)
