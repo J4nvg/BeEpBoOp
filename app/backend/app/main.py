@@ -31,8 +31,14 @@ def root(db: Session = Depends(get_db)):
 # Computer parts
 
 @app.get("/cpu", response_model=ComputerParts)
-def cpu(db: Session = Depends(get_db)):
+
+def cpu():
     return {"message": "CPU", "data": []}
+
+
+@app.get("/cpu/{cpu_id}", response_model=CPU)
+def cpu(cpu_id: int):
+    return {"id": cpu_id}
 
 
 @app.get("/memory", response_model=ComputerParts)
