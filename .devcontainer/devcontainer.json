@@ -5,16 +5,18 @@
         "ghcr.io/devcontainers/features/node:1": {
             "version": "19",
             "nodeGypDependencies": false
-        },
+        }
     },
     "customizations": {
         "vscode": {
             "extensions": [
                 "ms-python.python",
-                "esbenp.prettier-vscode"
+                "esbenp.prettier-vscode",
+                "tamasfe.even-better-toml"
             ]
         }
     },
+    "postCreateCommand": "curl -LsSf https://astral.sh/uv/install.sh | sh && uv sync",
     "forwardPorts": [50505],
     "portsAttributes": {
         "50505": {
