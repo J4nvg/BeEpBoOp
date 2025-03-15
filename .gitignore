@@ -1,2 +1,4 @@
 ### Ignore everything that is useless
 __pycache__
+.venv
+node_modules
