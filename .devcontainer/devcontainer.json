@@ -1,0 +1,27 @@
+{
+    "name": "RefineText-Upwork",
+    "image": "mcr.microsoft.com/devcontainers/python:3.11",
+    "features": {
+        "ghcr.io/devcontainers/features/node:1": {
+            "version": "19",
+            "nodeGypDependencies": false
+        },
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "esbenp.prettier-vscode"
+            ]
+        }
+    },
+    "forwardPorts": [50505],
+    "portsAttributes": {
+        "50505": {
+            "protocol": "http",
+            "label": "Web App",
+            "address": "127.0.0.1"
+        }
+    },
+    "remoteUser": "vscode",
+}
