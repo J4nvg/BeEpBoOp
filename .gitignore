@@ -6,3 +6,4 @@ node_modules
 .next
 .backend.pid
 uv.lock
+venv
