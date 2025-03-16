@@ -5,9 +5,9 @@ from sqlalchemy.orm import Session
 #from app.chatbot import run_initial_welcome, process_message
 from pydantic import BaseModel
 from fastapi import FastAPI, Depends, HTTPException, Request, Body
-from app.db.models import *
 from app.request_model import Build
 from fastapi.middleware.cors import CORSMiddleware
+from app.db.models import *
 
 app = FastAPI()
 
@@ -27,6 +27,7 @@ app.add_middleware(
 )
 
 engine = create_engine('sqlite:///hardware_db.db', echo=True)
+
 session = Session(engine)
 
 @app.get('/item/{sku}')
@@ -56,22 +57,31 @@ def cpu(build: Build):
             cpu_query = cpu_query.where(CPU.socket == mb.socket)
 
     if build.ram:
-        mb_query = select(Motherboard).where(Motherboard.sku == build.md)
-        mb = sessions.scalars(mb_query).one_or_none()
-        if mb:
+        ram_query = select(RAM).where(RAM.sku == build.ram)
+        ram = session.scalars(ram_query).one_or_none()
+        if ram:
             cpu_query = cpu_query.where(
-                (CPU.XMP_support == ram.XMP_support) | (CPU.AMDexpo_support == ram.AMDexpo_support) 
+                (CPU.XMP_support == ram.XMP_support) | (CPU.AMDexpo_support == ram.AMDexpo_support)
             )
-
-    filtered_cpus = session.scalars(cpu_query).all()
+    cpus = session.scalars(cpu_query).all()
         
-    for cpu in filtered_cpus:
-        cpu = CPU_response(
-            name: 
-        )
+    final_list = [CPU_response(
+            name = cpu.name,
+            price = cpu.price,
+            SKU = cpu.sku,
+            image_url = cpu.image_url,
+            link = cpu.link,
+            socket = cpu.socket,
+            power_consumption = cpu.power_consumption,
+            cores = cpu.cores,
+            threads = cpu.threads,
+            base_clock = cpu.base_clock,
+            boost_clock = cpu.boost_clock
+        ) for cpu in cpus]
+
     return {
         'message': 'cpus',
-        'data': []
+        'data': final_list
     }
 
 

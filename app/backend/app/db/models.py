@@ -5,7 +5,7 @@ from sqlalchemy.orm import mapped_column
 from sqlalchemy.orm import relationship
 from sqlalchemy.orm import DeclarativeBase
 
-engine = create_engine('sqlite+pysqlite:///hardware_db.db', echo=True)
+engine = create_engine('sqlite:///./hardware_db.db', echo=True)
     
 class Base(DeclarativeBase):
     pass
@@ -13,19 +13,28 @@ class Base(DeclarativeBase):
 class CPU(Base):
     __tablename__ = 'cpus'
     id: Mapped[int] = mapped_column(primary_key=True)
-    sku: Mapped[int] = mapped_column(unique=True)
+    sku: Mapped[int] = mapped_column(nullable=False)
+    name: Mapped[str]
+    price: Mapped[float]
+    link: Mapped[str]
+    image_url: Mapped[str]
     '''MOTHERBOARD'''
     socket: Mapped[str]
-    '''RAM'''
-    XMP_support: Mapped[bool]
-    AMDexpo_support: Mapped[bool]
     '''PSU (WATTS)'''
-    power_consumption: Mapped[int] 
+    power_consumption: Mapped[int]
+    cores: Mapped[int]
+    threads: Mapped[int]
+    base_clock: Mapped[float]
+    boost_clock: Mapped[float]
 
 class GraphicCard(Base):
     __tablename__ = 'gpus'
     id: Mapped[int] = mapped_column(primary_key=True)
-    sku: Mapped[int] = mapped_column(unique=True)
+    sku: Mapped[int] = mapped_column(unique=True, nullable=False)
+    name:  Mapped[str]
+    price: Mapped[float]
+    link: Mapped[str]
+    image_url: Mapped[str]
     '''MOTHERBOARD'''
     pcie_version: Mapped[float]
     '''PSU (WATTS)'''
@@ -36,7 +45,11 @@ class GraphicCard(Base):
 class Motherboard(Base):
     __tablename__ = 'motherboards'
     id: Mapped[int] = mapped_column(primary_key=True)
-    sku: Mapped[int] = mapped_column(unique=True)
+    sku: Mapped[int] = mapped_column(unique=True, nullable=False)
+    name: Mapped[str]
+    price: Mapped[float]
+    link: Mapped[str]
+    image_url: Mapped[str]
     '''CASE'''
     case_compatibility: Mapped[str]
     '''CPU'''
@@ -46,9 +59,12 @@ class Motherboard(Base):
     max_ram: Mapped[int]
     ram_type: Mapped[str]
     '''GPU (other)'''
+    pcie4_x16: Mapped[int]
+    pcie4_x4: Mapped[int]
+    pcie3_x16: Mapped[int]
+    pcie_express_x16: Mapped[int]
+    pcie_express_x4: Mapped[int]
     pcie5_slots: Mapped[int]
-    pcie4_slots: Mapped[int]
-    pcie3_slots: Mapped[int]
     '''STORAGE'''
     m2_slots: Mapped[int]
     sata3_slots: Mapped[int]
@@ -56,7 +72,11 @@ class Motherboard(Base):
 class RAM(Base):
     __tablename__ = 'rams'
     id: Mapped[int] = mapped_column(primary_key=True)
-    sku: Mapped[int] = mapped_column(unique=True)
+    sku: Mapped[int] = mapped_column(unique=True, nullable=False)
+    name: Mapped[str]
+    price: Mapped[float]
+    link: Mapped[str]
+    image_url: Mapped[str]
     '''MOTHERBOARD'''
     ram_type: Mapped[str]
     ram_slots: Mapped[int]
@@ -68,12 +88,16 @@ class RAM(Base):
 class Storage(Base):
     __tablename__ = 'storages'
     id: Mapped[int] = mapped_column(primary_key=True)
-    sku: Mapped[int] = mapped_column(unique=True)
+    sku: Mapped[int] = mapped_column(unique=True, nullable=False)
+    name: Mapped[str]
+    price: Mapped[float]
+    link: Mapped[str]
+    image_url: Mapped[str]
     '''MOTHERBOARD'''
     storage_type: Mapped[str]
 
 cooling_socket_rel = Table(
-    'cooling_socket', 
+    'cooling_socket',
     Base.metadata,
     Column('cooling_id', Integer, ForeignKey('coolings.id'), ),
     Column('socket_id', Integer, ForeignKey('sockets.id'), )
@@ -82,7 +106,11 @@ cooling_socket_rel = Table(
 class Cooling(Base):
     __tablename__ = 'coolings'
     id: Mapped[int] = mapped_column(primary_key=True)
-    sku: Mapped[int] = mapped_column(unique=True)
+    sku: Mapped[int] = mapped_column(unique=True, nullable=False)
+    name: Mapped[str]
+    price: Mapped[float]
+    link: Mapped[str]
+    image_url: Mapped[str]
     '''CASE'''
     number_of_fans: Mapped[int]
     fan_diamater: Mapped[int] #(MMS)
@@ -97,12 +125,16 @@ class Socket(Base):
     '''MOTHERBOARD'''
     socket_type: Mapped[str]
     '''COOLINGS'''
-    coolings = relationship('Cooling', secondary=cooling_socket_rel, back_populates='sockets')    
+    coolings = relationship('Cooling', secondary=cooling_socket_rel, back_populates='sockets')
 
 class Case(Base):
     __tablename__ = 'cases'
     id: Mapped[int] = mapped_column(primary_key=True)
-    sku: Mapped[int] = mapped_column(unique=True)
+    sku: Mapped[int] = mapped_column(unique=True, nullable=False)
+    name: Mapped[str]
+    price: Mapped[float]
+    link: Mapped[str]
+    image_url: Mapped[str]
     '''MOTHERBOARD'''
     case_format: Mapped[str]
     '''GPU (MMS)'''
@@ -116,11 +148,14 @@ class Case(Base):
 class PSU(Base):
     __tablename__ = 'psus'
     id: Mapped[int] = mapped_column(primary_key=True)
-    sku: Mapped[int] = mapped_column(unique=True)
+    sku: Mapped[int] = mapped_column(unique=True, nullable=False)
+    name: Mapped[str]
+    price: Mapped[float]
+    link: Mapped[str]
+    image_url: Mapped[str]
     '''CASE (MMS)'''
     depth: Mapped[int]
     '''EVERYTHING'''
     power: Mapped[int]
-
 
 Base.metadata.create_all(engine)
