@@ -30,11 +30,11 @@ export interface ComponentType {
   
 export const componentTypes: ComponentType[] = [
     { id: "cpu", label: "CPU", icon: Cpu },
-    { id: "motherboard", label: "Motherboard", icon: Motherboard },
+    { id: "mb", label: "Motherboard", icon: Motherboard },
     { id: "gpu", label: "GPU", icon: Gpu },
     { id: "ram", label: "RAM", icon: Memory },
     { id: "storage", label: "Storage", icon: HardDrive },
     { id: "cooling", label: "Cooling", icon: Fan },
     { id: "case", label: "Case", icon: Square },
-    { id: "power", label: "Power Supply", icon: Power },
+    { id: "psu", label: "Power Supply", icon: Power },
   ]
