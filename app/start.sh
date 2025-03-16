@@ -42,7 +42,7 @@ start_backend() {
 setup_frontend() {
   echo "Installing and building frontend..."
   cd app/frontend
-  npm install
+  npm install --force
   npm run dev
   cd ../..
 }

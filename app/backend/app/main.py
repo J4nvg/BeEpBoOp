@@ -28,40 +28,51 @@ def root():
 
 @app.post("/cpu", response_model=ComputerParts)
 def cpu(build: Build):
-    return {'message': 'JEST KURWA', 'cpu_sku': build.sku}
+    for item, present in build:
+        if present:
+            print(item,present)
+        else:
+            print(f'{item} not here')
+        
+    return {
+        'message': 'cpus',
+        'data': []
+    }
 
 
-@app.get("/memory", response_model=ComputerParts)
+@app.post("/memory", response_model=ComputerParts)
 def memory(build: Build):
-
-    return {"message": "Memory", "data": []}
+    return {
+        "message": "memories", 
+        "data": []
+    }
 
 
 @app.get("/storage", response_model=ComputerParts)
 def disk():
-    return {"name": "Storage", "data": []}
+    return {"name": "storages", "data": []}
 
 
 @app.get("/mb", response_model=ComputerParts)
 def mb():
-    return {"name": "Mother Board", "data": []}
+    return {"name": "motherboards", "data": []}
 
 
 @app.get("/cooler", response_model=ComputerParts)
 def cooler():
-    return {"name": "Cooler", "data": []}
+    return {"name": "coolers", "data": []}
 
 
 @app.get("/gpu", response_model=ComputerParts)
 def gpu():
-    return {"name": "GPU", "data": []}
+    return {"name": "gpus", "data": []}
 
 
 @app.get("/psu", response_model=ComputerParts)
 def psu():
-    return {"name": "PSU", "data": []}
+    return {"name": "psus", "data": []}
 
 
 @app.get("/case", response_model=ComputerParts)
 def case():
-    return {"name": "Case", "data": []}
+    return {"name": "cases", "data": []}
