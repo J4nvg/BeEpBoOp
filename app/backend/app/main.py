@@ -1,14 +1,28 @@
 from app.models import ComputerParts, Storage, CPU, Memory, Motherboard, Cooler, GPU, PSU, Case
 import sqlalchemy as db
 from sqlalchemy.orm import Session
-from chatbot import run_initial_welcome, process_message
+#from app.chatbot import run_initial_welcome, process_message
 from pydantic import BaseModel
 from fastapi import FastAPI, Depends, HTTPException, Request, Body
 from app.db.models import *
 from app.request_model import Build
-
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+origins = [
+    "http://localhost",
+    "http://localhost:8080",
+    "http://localhost:8000",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 engine = create_engine('sqlite:///hardware_db.db', echo=True)
 session = Session(engine)
@@ -31,9 +45,16 @@ def root():
 
 @app.post("/cpu", response_model=ComputerParts)
 def cpu(build: Build):
-    for item, present in build:
-        if present:
-            print(item,present)
+    cpus = []
+    for item, sku in build:
+        if sku:
+            if item == 'mb':
+                motherboard = select(Motherboard).where(Motherboard.sku == sku)
+                mb = session.scalars(motherboard).one()
+                socket = mb.socket
+                filter_cpu = select(CPU).where(CPU.socket == socket)
+
+
         else:
             print(f'{item} not here')
         
