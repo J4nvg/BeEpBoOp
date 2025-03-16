@@ -6,7 +6,7 @@ from sqlalchemy.orm import relationship
 from sqlalchemy.orm import DeclarativeBase
 
 engine = create_engine('sqlite+pysqlite:///hardware_db.db', echo=True)
-
+    
 class Base(DeclarativeBase):
     pass
 
@@ -39,7 +39,7 @@ class Motherboard(Base):
     sku: Mapped[int] = mapped_column(unique=True)
     '''CASE'''
     case_compatibility: Mapped[str]
-    '''GPU'''
+    '''CPU'''
     socket: Mapped[str]
     '''RAM'''
     ram_slots: Mapped[int]
