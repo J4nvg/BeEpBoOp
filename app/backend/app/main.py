@@ -5,9 +5,10 @@ from sqlalchemy.orm import Session
 #from app.chatbot import run_initial_welcome, process_message
 from pydantic import BaseModel
 from fastapi import FastAPI, Depends, HTTPException, Request, Body
-from app.db.models import *
 from app.request_model import Build
 from fastapi.middleware.cors import CORSMiddleware
+from app.db.models import *
+from app.db.database import SessionLocal
 
 app = FastAPI()
 

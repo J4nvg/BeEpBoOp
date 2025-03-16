@@ -20,7 +20,7 @@ class CPU(Base):
     XMP_support: Mapped[bool]
     AMDexpo_support: Mapped[bool]
     '''PSU (WATTS)'''
-    power_consumption: Mapped[int] 
+    power_consumption: Mapped[int]
 
 class GraphicCard(Base):
     __tablename__ = 'gpus'
@@ -73,7 +73,7 @@ class Storage(Base):
     storage_type: Mapped[str]
 
 cooling_socket_rel = Table(
-    'cooling_socket', 
+    'cooling_socket',
     Base.metadata,
     Column('cooling_id', Integer, ForeignKey('coolings.id'), ),
     Column('socket_id', Integer, ForeignKey('sockets.id'), )
@@ -97,7 +97,7 @@ class Socket(Base):
     '''MOTHERBOARD'''
     socket_type: Mapped[str]
     '''COOLINGS'''
-    coolings = relationship('Cooling', secondary=cooling_socket_rel, back_populates='sockets')    
+    coolings = relationship('Cooling', secondary=cooling_socket_rel, back_populates='sockets')
 
 class Case(Base):
     __tablename__ = 'cases'
