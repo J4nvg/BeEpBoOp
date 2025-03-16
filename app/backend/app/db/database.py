@@ -58,10 +58,31 @@ def init_db(session: Session):
                         case_compatibility=specs["Form factor moederbord"]
                     ))
                 if category == "Geheugen":
-                    pass
-                    #session.add(RAM(sku=product["sku"], ram_type=specs["type"], ram_slots=10, memory=10, XMP_support=10, AMDexpo_support=10))
+                    xmp_support = specs.get("XMP ondersteuning", False)
+                    if xmp_support == "✓︎":
+                        xmp_support = True
+                    amd_expo_support = specs.get("AMD EXPO ondersteuning", False)
+                    if amd_expo_support == "✓︎":
+                        amd_expo_support = True
+                    session.add(RAM(sku=product["sku"], name=product["name"], image_url=product["image"], link=offer["url"], price=offer["price"], ram_type=specs["Geheugen Type"], ram_slots=specs["Modules (aantal)"], memory=specs["Geheugen capaciteit"], XMP_support=xmp_support, AMDexpo_support=amd_expo_support))
                 if category == "Videokaarten":
                     session.add(GraphicCard(sku=product["sku"], name=product["name"], image_url=product["image"], link=offer["url"], price=offer["price"], pcie_version=specs["PCI Express versie"].split(" ")[1], length=specs["Lengte"].split(" ")[0], power_consumption=specs["Minimale voeding"].split(" ")[0]))
+                if category == "Behuizingen en meer":
+                    max_fan_size_achter = specs.get("Geïnstalleerde Fans achterkant", "").split(" ")[0].replace("x", "")
+                    max_fan_size_zij = specs.get("Geïnstalleerde Fans zijkant", "").split(" ")[0].replace("x", "")
+                    max_fan_size_onder = specs.get("Geïnstalleerde Fans onderkant", "").split(" ")[0].replace("x", "")
+                    max_fans_size = max_fan_size_achter + max_fan_size_zij + max_fan_size_onder
+                    max_pump_size = specs.get("Maximum CPU cooler hoogte", "")
+                    max_psu_length = specs.get("Maximum PSU lengte", "")
+                    session.add(Case(sku=product["sku"], name=product["name"], image_url=product["image"], link=offer["url"], price=offer["price"], case_format=specs["Max moederbord formaat"], max_gpu_size=specs["Maximum grafische kaart lengte"], max_pump_size=max_pump_size, max_fans_size=max_fans_size, max_psu_length=max_psu_length))
+                if category == "Koeling":
+                    power_consumption = specs.get("Stroomverbruik (typisch)", "0.0").split(" ")[0]
+                    number_fans = specs.get("Aantal Ventilatoren", "0").split(" ")[0]
+                    session.add(Cooling(sku=product["sku"], name=product["name"], image_url=product["image"], link=offer["url"], price=offer["price"], number_of_fans=number_fans, power_consumption=power_consumption, fan_diamater=specs["Fan Diameter"]))
+                if category == "SSD (Solid state drive)":
+                    interface = specs.get("Interface", "")
+                    storage_type = interface.split(" ")[2]
+                    session.add(Storage(sku=product["sku"], name=product["name"], image_url=product["image"], link=offer["url"], price=offer["price"], storage_type=storage_type, capacity=specs["SSD Opslagcapaciteit"]))
         session.commit()
 
 #init_db(session)

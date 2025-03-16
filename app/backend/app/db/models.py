@@ -95,6 +95,7 @@ class Storage(Base):
     image_url: Mapped[str]
     '''MOTHERBOARD'''
     storage_type: Mapped[str]
+    capacity: Mapped[int]
 
 cooling_socket_rel = Table(
     'cooling_socket',
@@ -143,7 +144,7 @@ class Case(Base):
     max_pump_size: Mapped[int]
     max_fans_size: Mapped[int]
     '''PSU (MMS)'''
-    max_psu_lenght: Mapped[int]
+    max_psu_length: Mapped[int]
 
 class PSU(Base):
     __tablename__ = 'psus'
