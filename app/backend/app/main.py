@@ -1,4 +1,4 @@
-from app.models import ComputerParts, Storage, CPU_response, Memory, Motherboard, Cooler, GPU, PSU, Case
+from app.models import ComputerParts, Storage, CPU_response, Memory_response, Motherboard, Cooler, GPU, PSU, Case
 import sqlalchemy as db
 from sqlalchemy import select
 from sqlalchemy.orm import Session
@@ -26,7 +26,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-engine = create_engine('sqlite:///hardware_db.db', echo=True)
+engine = create_engine('sqlite:///app/hardware_db.db', echo=True)
 
 session = Session(engine)
 
@@ -50,6 +50,7 @@ def root():
 def cpu(build: Build):
     cpu_query = select(CPU)
 
+    print(f'!!!\n{build}\n!!!')
     if build.mb:    
         mb_query = select(Motherboard).where(Motherboard.sku == build.mb)
         mb = session.scalars(mb_query).one_or_none()
@@ -87,9 +88,42 @@ def cpu(build: Build):
 
 @app.post("/memory", response_model=ComputerParts)
 def memory(build: Build):
+    memory_query = select(RAM)
+
+    if build.cpu:
+        cpu_query = select(CPU).where(CPU.sku == build.cpu)
+        cpu = session.scalars(cpu_query).one_or_none()
+        if cpu:
+            memory_query = memory_query.where(
+                (RAM.XMP_support == build.XMP_support) | (RAM.AMDexpo_support == build.AMDexpo_support)
+            )
+
+    if build.mb:
+        mb_query = select(Motherboard).where(Motherboard.sku == build.mb)
+        mb = session.scalars(mb_query).one_or_none()
+        if mb:
+            memory_query = memory_query.where(
+                (RAM.ram_type == mb.ram_type) | (RAM.ram_slots <= mb.ram_slots) | (RAM.memory <= mb.max_ram)
+            )
+    
+    rams = session.scalars(memory_query).all()
+
+    final_list = [Memory_response(
+        name = ram.name,
+        price = ram.price,
+        SKU = ram.price,
+        image_url = ram.image_url,
+        link = ram.link,
+        ram_type = ram.ram_type,
+        ram_slots = ram.ram_slots,
+        memory = ram.memory,
+        XMP_support = ram.XMP_support,
+        AMDexpo_support = ram.AMDexpo_support
+    ) for ram in rams]
+
     return {
-        "message": "memories", 
-        "data": []
+        "message": "rams", 
+        "data": final_list
     }
 
 

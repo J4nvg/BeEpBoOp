@@ -20,11 +20,12 @@ class CPU_response(ComputerPart):
     boost_clock: float
     power_consumption: str
 
-class Memory(ComputerPart):
-    speed: int
-    modules: int
-    latency: int
-    voltage: int
+class Memory_response(ComputerPart):
+    ram_type: str
+    ram_slots: int
+    memory: int
+    XMP_support: bool
+    AMDexpo_support: bool
 
 class Storage(ComputerPart):
     capacity: int
