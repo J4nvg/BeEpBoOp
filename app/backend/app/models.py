@@ -30,17 +30,34 @@ class Memory_response(ComputerPart):
 class Storage_response(ComputerPart):
     storage_type: str
 
-class Motherboard(ComputerPart):
+class Motherboard_response(ComputerPart):
+    case_compatibility: str
     socket: str
-    chipset: str
-    form_factor: str
-    memory_slots: int
+    ram_slots: int
+    max_ram: int
+    ram_type: str
+    pcie4_x16: int
+    pcie4_x4: int
+    pcie5_slots: int
 
-class Cooler(ComputerPart):
-    fan_rpm: int
-    noise_level: int
-    fan_size: int
-    radiator_size: int
+
+class Cooler_response(ComputerPart):
+    nr_fans: int
+    fan_diameter: int
+    power_consumption: int
+
+    @field_validator('power_consumption', mode='before')
+    @classmethod
+    def convert_length(cls, v):
+        if isinstance(v, str):
+            v = v.replace(",", ".")  
+            try:
+                return int(float(v)) 
+            except ValueError:
+                raise ValueError("Invalid type for length, must be an integer or numeric string")
+        elif isinstance(v, (int, float)):
+            return int(v)  
+        raise ValueError("Invalid type for length, must be an integer or numeric string")
 
 class GPU_response(ComputerPart):
     pcie_version: int
@@ -61,16 +78,9 @@ class GPU_response(ComputerPart):
         raise ValueError("Invalid type for length, must be an integer or numeric string")
 
 
+class PSU_response(ComputerPart):
+    depth: int
+    power: int
 
-class PSU(ComputerPart):
-    wattage: int
-    efficiency: str
-    modular: bool
-    rating: str
-
-class Case(ComputerPart):
-    form_factor: str
-    fans: int
-    side_panel: str
-    PSU: str
-    radiator: str
+class Case_response(ComputerPart):
+    case_format: str
