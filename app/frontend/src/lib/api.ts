@@ -20,7 +20,7 @@ export async function fetchCompatible(
   }
   
   const endpoint = `${FastApiLink}/${comp}`;
-  
+  console.log(JSON.stringify(configuration))
   const response = await fetch(endpoint, {
     method: "POST",
     headers: {

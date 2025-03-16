@@ -1,5 +1,6 @@
 from app.models import ComputerParts, Storage, CPU, Memory, Motherboard, Cooler, GPU, PSU, Case
 import sqlalchemy as db
+from sqlalchemy import select
 from sqlalchemy.orm import Session
 #from app.chatbot import run_initial_welcome, process_message
 from pydantic import BaseModel
@@ -12,6 +13,7 @@ app = FastAPI()
 
 origins = [
     "http://localhost",
+    "http://localhost:3000",
     "http://localhost:8080",
     "http://localhost:8000",
 ]
