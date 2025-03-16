@@ -1,9 +1,12 @@
 from app.models import ComputerParts, Storage, CPU, Memory, Motherboard, Cooler, GPU, PSU, Case
 import sqlalchemy as db
-from fastapi import FastAPI, Depends, HTTPException, Request
 from sqlalchemy.orm import Session
+from chatbot import run_initial_welcome, process_message
+from pydantic import BaseModel
+from fastapi import FastAPI, Depends, HTTPException, Request, Body
 from app.db.models import *
 from app.request_model import Build
+
 
 app = FastAPI()
 
@@ -76,3 +79,4 @@ def psu():
 @app.get("/case", response_model=ComputerParts)
 def case():
     return {"name": "cases", "data": []}
+
