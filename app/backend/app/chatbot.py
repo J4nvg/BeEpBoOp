@@ -44,6 +44,7 @@ class MyEventHandler(AssistantEventHandler):
 # ---------------------
 class CaptureEventHandler(AssistantEventHandler):
     def __init__(self):
+        super().__init__()  # Initialize the base class attributes
         self.result = ""
     
     def on_text_created(self, text) -> None:
