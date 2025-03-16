@@ -7,7 +7,7 @@ class Build(BaseModel):
     mb: Optional[int] = None
     ram: Optional[int] = None
     storage: Optional[int] = None
-    colling: Optional[int] = None
+    cooling: Optional[int] = None
     case: Optional[int] = None
     psu: Optional[int] = None
 

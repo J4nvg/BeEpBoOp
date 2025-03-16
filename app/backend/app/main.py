@@ -1,5 +1,6 @@
-from app.models import ComputerParts, Storage, CPU, Memory, Motherboard, Cooler, GPU, PSU, Case
+from app.models import ComputerParts, Storage, CPU_response, Memory, Motherboard, Cooler, GPU, PSU, Case
 import sqlalchemy as db
+from sqlalchemy import select
 from sqlalchemy.orm import Session
 #from app.chatbot import run_initial_welcome, process_message
 from pydantic import BaseModel
@@ -45,19 +46,28 @@ def root():
 
 @app.post("/cpu", response_model=ComputerParts)
 def cpu(build: Build):
-    cpus = []
-    for item, sku in build:
-        if sku:
-            if item == 'mb':
-                motherboard = select(Motherboard).where(Motherboard.sku == sku)
-                mb = session.scalars(motherboard).one()
-                socket = mb.socket
-                filter_cpu = select(CPU).where(CPU.socket == socket)
+    cpu_query = select(CPU)
 
+    if build.mb:    
+        mb_query = select(Motherboard).where(Motherboard.sku == build.mb)
+        mb = session.scalars(mb_query).one_or_none()
+        if mb:
+            cpu_query = cpu_query.where(CPU.socket == mb.socket)
 
-        else:
-            print(f'{item} not here')
+    if build.ram:
+        mb_query = select(Motherboard).where(Motherboard.sku == build.md)
+        mb = sessions.scalars(mb_query).one_or_none()
+        if mb:
+            cpu_query = cpu_query.where(
+                (CPU.XMP_support == ram.XMP_support) | (CPU.AMDexpo_support == ram.AMDexpo_support) 
+            )
+
+    filtered_cpus = session.scalars(cpu_query).all()
         
+    for cpu in filtered_cpus:
+        cpu = CPU_response(
+            name: 
+        )
     return {
         'message': 'cpus',
         'data': []
