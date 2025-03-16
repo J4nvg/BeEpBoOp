@@ -5,7 +5,7 @@ from sqlalchemy.orm import mapped_column
 from sqlalchemy.orm import relationship
 from sqlalchemy.orm import DeclarativeBase
 
-engine = create_engine('sqlite+pysqlite:///hardware_db.db', echo=True)
+engine = create_engine('sqlite:///./hardware_db.db', echo=True)
     
 class Base(DeclarativeBase):
     pass
@@ -13,15 +13,11 @@ class Base(DeclarativeBase):
 class CPU(Base):
     __tablename__ = 'cpus'
     id: Mapped[int] = mapped_column(primary_key=True)
-<<<<<<< HEAD
-    sku: Mapped[int] = mapped_column(unique=True)
-=======
     sku: Mapped[int] = mapped_column(nullable=False)
     name: Mapped[str]
     price: Mapped[float]
     link: Mapped[str]
     image_url: Mapped[str]
->>>>>>> test
     '''MOTHERBOARD'''
     socket: Mapped[str]
     '''PSU (WATTS)'''
@@ -34,15 +30,11 @@ class CPU(Base):
 class GraphicCard(Base):
     __tablename__ = 'gpus'
     id: Mapped[int] = mapped_column(primary_key=True)
-<<<<<<< HEAD
-    sku: Mapped[int] = mapped_column(unique=True)
-=======
     sku: Mapped[int] = mapped_column(unique=True, nullable=False)
     name:  Mapped[str]
     price: Mapped[float]
     link: Mapped[str]
     image_url: Mapped[str]
->>>>>>> test
     '''MOTHERBOARD'''
     pcie_version: Mapped[float]
     '''PSU (WATTS)'''
@@ -53,15 +45,11 @@ class GraphicCard(Base):
 class Motherboard(Base):
     __tablename__ = 'motherboards'
     id: Mapped[int] = mapped_column(primary_key=True)
-<<<<<<< HEAD
-    sku: Mapped[int] = mapped_column(unique=True)
-=======
     sku: Mapped[int] = mapped_column(unique=True, nullable=False)
     name: Mapped[str]
     price: Mapped[float]
     link: Mapped[str]
     image_url: Mapped[str]
->>>>>>> test
     '''CASE'''
     case_compatibility: Mapped[str]
     '''CPU'''
@@ -84,15 +72,11 @@ class Motherboard(Base):
 class RAM(Base):
     __tablename__ = 'rams'
     id: Mapped[int] = mapped_column(primary_key=True)
-<<<<<<< HEAD
-    sku: Mapped[int] = mapped_column(unique=True)
-=======
     sku: Mapped[int] = mapped_column(unique=True, nullable=False)
     name: Mapped[str]
     price: Mapped[float]
     link: Mapped[str]
     image_url: Mapped[str]
->>>>>>> test
     '''MOTHERBOARD'''
     ram_type: Mapped[str]
     ram_slots: Mapped[int]
@@ -104,15 +88,11 @@ class RAM(Base):
 class Storage(Base):
     __tablename__ = 'storages'
     id: Mapped[int] = mapped_column(primary_key=True)
-<<<<<<< HEAD
-    sku: Mapped[int] = mapped_column(unique=True)
-=======
     sku: Mapped[int] = mapped_column(unique=True, nullable=False)
     name: Mapped[str]
     price: Mapped[float]
     link: Mapped[str]
     image_url: Mapped[str]
->>>>>>> test
     '''MOTHERBOARD'''
     storage_type: Mapped[str]
 
@@ -126,15 +106,11 @@ cooling_socket_rel = Table(
 class Cooling(Base):
     __tablename__ = 'coolings'
     id: Mapped[int] = mapped_column(primary_key=True)
-<<<<<<< HEAD
-    sku: Mapped[int] = mapped_column(unique=True)
-=======
     sku: Mapped[int] = mapped_column(unique=True, nullable=False)
     name: Mapped[str]
     price: Mapped[float]
     link: Mapped[str]
     image_url: Mapped[str]
->>>>>>> test
     '''CASE'''
     number_of_fans: Mapped[int]
     fan_diamater: Mapped[int] #(MMS)
@@ -154,15 +130,11 @@ class Socket(Base):
 class Case(Base):
     __tablename__ = 'cases'
     id: Mapped[int] = mapped_column(primary_key=True)
-<<<<<<< HEAD
-    sku: Mapped[int] = mapped_column(unique=True)
-=======
     sku: Mapped[int] = mapped_column(unique=True, nullable=False)
     name: Mapped[str]
     price: Mapped[float]
     link: Mapped[str]
     image_url: Mapped[str]
->>>>>>> test
     '''MOTHERBOARD'''
     case_format: Mapped[str]
     '''GPU (MMS)'''
@@ -176,19 +148,14 @@ class Case(Base):
 class PSU(Base):
     __tablename__ = 'psus'
     id: Mapped[int] = mapped_column(primary_key=True)
-<<<<<<< HEAD
-    sku: Mapped[int] = mapped_column(unique=True)
-=======
     sku: Mapped[int] = mapped_column(unique=True, nullable=False)
     name: Mapped[str]
     price: Mapped[float]
     link: Mapped[str]
     image_url: Mapped[str]
->>>>>>> test
     '''CASE (MMS)'''
     depth: Mapped[int]
     '''EVERYTHING'''
     power: Mapped[int]
-
 
 Base.metadata.create_all(engine)
