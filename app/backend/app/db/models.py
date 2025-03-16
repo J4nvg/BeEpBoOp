@@ -3,11 +3,12 @@ from sqlalchemy import Table, Column, Integer, ForeignKey
 from sqlalchemy.orm import Mapped
 from sqlalchemy.orm import mapped_column
 from sqlalchemy.orm import relationship
-from sqlalchemy.orm import declarative_base
+from sqlalchemy.orm import DeclarativeBase
 
-engine = create_engine('sqlite+pysqlite:///hardware_db.db', echo=True)
-
-Base = declarative_base()
+engine = create_engine('sqlite:///../hardware_db.db', echo=True)
+    
+class Base(DeclarativeBase):
+    pass
 
 class CPU(Base):
     __tablename__ = 'cpus'
@@ -51,7 +52,7 @@ class Motherboard(Base):
     image_url: Mapped[str]
     '''CASE'''
     case_compatibility: Mapped[str]
-    '''GPU'''
+    '''CPU'''
     socket: Mapped[str]
     '''RAM'''
     ram_slots: Mapped[int]
@@ -117,7 +118,7 @@ class Cooling(Base):
     '''PSU (WATTS)'''
     power_consumption: Mapped[int]
     '''SOCKETS'''
-    sockets = relationship('Socket', secondary=cooling_socket_rel, back_populates='coolings')
+    sockets = relationship('Socket', secondary=cooling_socket_rel, back_populates='coolings')    
 
 class Socket(Base):
     __tablename__ = 'sockets'
@@ -158,4 +159,4 @@ class PSU(Base):
     '''EVERYTHING'''
     power: Mapped[int]
 
-Base.metadata.create_all(engine)
+#Base.metadata.create_all(engine)

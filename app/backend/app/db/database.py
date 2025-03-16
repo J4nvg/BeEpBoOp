@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 import json
 from models import CPU, Motherboard, RAM, Storage, Cooling, GraphicCard, PSU, Case
 
-DATABASE_URL = "sqlite:///hardware_db.db"
+DATABASE_URL = "sqlite:///../hardware_db.db"
 engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
 
 session = Session(engine)
@@ -19,9 +19,11 @@ def init_db(session: Session):
                 specs = product["specs"]
                 if category == "Processoren":
                     boost_clock = float(specs.get("Kloksnelheid Turbo", "0.0").split(" ")[0])
-                    session.add(CPU(sku=product["sku"], name=product["name"], image_url=product["image"],
+                    session.add(CPU(sku=product["sku"], name=product["name"],
+                        price=offer["price"],
+                        image_url=product["image"],
                         link=offer["url"],
-                        price=offer["price"],socket=specs["Socket"], cores=specs["Processor Cores"], threads=specs["Processor aantal threads"], base_clock=float(specs["Processor Snelheid"].split(" ")[0]), boost_clock=boost_clock, power_consumption=specs["TDP (max)"]))
+                        socket=specs["Socket"], cores=specs["Processor Cores"], threads=specs["Processor aantal threads"], base_clock=float(specs["Processor Snelheid"].split(" ")[0]), boost_clock=boost_clock, power_consumption=specs["TDP (max)"]))
 
                 if category == "Moederborden":
                     pcie5_slots = int(specs.get("PCI-E 5.0 x16", "0").split(" ")[0])
@@ -35,13 +37,12 @@ def init_db(session: Session):
                     if max_ram == "0":
                         max_ram = specs.get("Maximaal intern geheugen ondersteund door processor", "0")
 
-
                     session.add(Motherboard(
                         sku=product["sku"],
                         name=product["name"],
+                        price=offer["price"],
                         image_url=product["image"],
                         link=offer["url"],
-                        price=offer["price"],
                         socket=specs["Socket"],
                         ram_slots=specs["Aantal geheugen slots"].split(" ")[0],
                         ram_type=specs["Geheugen type"],
@@ -84,4 +85,4 @@ def init_db(session: Session):
                     session.add(Storage(sku=product["sku"], name=product["name"], image_url=product["image"], link=offer["url"], price=offer["price"], storage_type=storage_type, capacity=specs["SSD Opslagcapaciteit"]))
         session.commit()
 
-init_db(session)
+#init_db(session)

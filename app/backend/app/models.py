@@ -1,28 +1,31 @@
 from pydantic import BaseModel
 from typing import List
-
+    
 class ComputerPart(BaseModel):
     name: str
     price: float
-    SKU: str
-    brand: str
+    SKU: int
+    image_url: str
+    link: str
 
 class ComputerParts(BaseModel):
     message: str
     data: List[ComputerPart] = []
 
-class CPU(ComputerPart):
+class CPU_response(ComputerPart):
+    socket: str
     cores: int
     threads: int
     base_clock: float
     boost_clock: float
-    TDP: int
+    power_consumption: str
 
-class Memory(ComputerPart):
-    speed: int
-    modules: int
-    latency: int
-    voltage: int
+class Memory_response(ComputerPart):
+    ram_type: str
+    ram_slots: int
+    memory: int
+    XMP_support: bool
+    AMDexpo_support: bool
 
 class Storage(ComputerPart):
     capacity: int

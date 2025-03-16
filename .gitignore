@@ -2,6 +2,8 @@
 __pycache__
 .venv
 node_modules
+.env
 .next
 .backend.pid
 uv.lock
+venv

@@ -28,21 +28,22 @@ setup_backend() {
   echo "Creating and configuring Python venv..."
   cd app/backend
   uv sync
+  cd app/
   start_backend
 }
 
 start_backend() {
   echo "Starting backend on localhost:8000..."
-  uv run uvicorn app.main:app --workers 1 --host localhost --port 8000 &
+  uv run uvicorn main:app --workers 1 --host localhost --port 8000 &
   BACKEND_PID=$!
   echo "$BACKEND_PID" > ../../.backend.pid
-  cd ../..
+  cd ../../..
 }
 
 setup_frontend() {
   echo "Installing and building frontend..."
   cd app/frontend
-  npm install
+  npm install --force
   npm run dev
   cd ../..
 }
