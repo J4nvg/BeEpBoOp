@@ -3,16 +3,17 @@ from sqlalchemy import Table, Column, Integer, ForeignKey
 from sqlalchemy.orm import Mapped
 from sqlalchemy.orm import mapped_column
 from sqlalchemy.orm import relationship
-from sqlalchemy.orm import declarative_base
+from sqlalchemy.orm import DeclarativeBase
 
 engine = create_engine('sqlite+pysqlite:///hardware_db.db', echo=True)
 
-Base = declarative_base()
+class Base(DeclarativeBase):
+    pass
 
 class CPU(Base):
     __tablename__ = 'cpus'
     id: Mapped[int] = mapped_column(primary_key=True)
-    sku: Mapped[int] = mapped_column(unique=True, nullable=False)
+    sku: Mapped[int] = mapped_column(unique=True)
     '''MOTHERBOARD'''
     socket: Mapped[str]
     '''RAM'''
@@ -24,7 +25,7 @@ class CPU(Base):
 class GraphicCard(Base):
     __tablename__ = 'gpus'
     id: Mapped[int] = mapped_column(primary_key=True)
-    sku: Mapped[int] = mapped_column(unique=True, nullable=False)
+    sku: Mapped[int] = mapped_column(unique=True)
     '''MOTHERBOARD'''
     pcie_version: Mapped[float]
     '''PSU (WATTS)'''
@@ -35,7 +36,7 @@ class GraphicCard(Base):
 class Motherboard(Base):
     __tablename__ = 'motherboards'
     id: Mapped[int] = mapped_column(primary_key=True)
-    sku: Mapped[int] = mapped_column(unique=True, nullable=False)
+    sku: Mapped[int] = mapped_column(unique=True)
     '''CASE'''
     case_compatibility: Mapped[str]
     '''GPU'''
@@ -55,7 +56,7 @@ class Motherboard(Base):
 class RAM(Base):
     __tablename__ = 'rams'
     id: Mapped[int] = mapped_column(primary_key=True)
-    sku: Mapped[int] = mapped_column(unique=True, nullable=False)
+    sku: Mapped[int] = mapped_column(unique=True)
     '''MOTHERBOARD'''
     ram_type: Mapped[str]
     ram_slots: Mapped[int]
@@ -67,7 +68,7 @@ class RAM(Base):
 class Storage(Base):
     __tablename__ = 'storages'
     id: Mapped[int] = mapped_column(primary_key=True)
-    sku: Mapped[int] = mapped_column(unique=True, nullable=False)
+    sku: Mapped[int] = mapped_column(unique=True)
     '''MOTHERBOARD'''
     storage_type: Mapped[str]
 
@@ -81,14 +82,14 @@ cooling_socket_rel = Table(
 class Cooling(Base):
     __tablename__ = 'coolings'
     id: Mapped[int] = mapped_column(primary_key=True)
-    sku: Mapped[int] = mapped_column(unique=True, nullable=False)
+    sku: Mapped[int] = mapped_column(unique=True)
     '''CASE'''
     number_of_fans: Mapped[int]
     fan_diamater: Mapped[int] #(MMS)
     '''PSU (WATTS)'''
     power_consumption: Mapped[int]
     '''SOCKETS'''
-    sockets = relationship('Socket', secondary=cooling_socket_rel, back_populates='coolers')    
+    sockets = relationship('Socket', secondary=cooling_socket_rel, back_populates='coolings')    
 
 class Socket(Base):
     __tablename__ = 'sockets'
@@ -101,7 +102,7 @@ class Socket(Base):
 class Case(Base):
     __tablename__ = 'cases'
     id: Mapped[int] = mapped_column(primary_key=True)
-    sku: Mapped[int] = mapped_column(unique=True, nullable=False)
+    sku: Mapped[int] = mapped_column(unique=True)
     '''MOTHERBOARD'''
     case_format: Mapped[str]
     '''GPU (MMS)'''
@@ -115,10 +116,11 @@ class Case(Base):
 class PSU(Base):
     __tablename__ = 'psus'
     id: Mapped[int] = mapped_column(primary_key=True)
-    sku: Mapped[int] = mapped_column(unique=True, nullable=False)
+    sku: Mapped[int] = mapped_column(unique=True)
     '''CASE (MMS)'''
     depth: Mapped[int]
     '''EVERYTHING'''
     power: Mapped[int]
+
 
 Base.metadata.create_all(engine)
