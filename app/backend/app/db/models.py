@@ -5,7 +5,7 @@ from sqlalchemy.orm import mapped_column
 from sqlalchemy.orm import relationship
 from sqlalchemy.orm import DeclarativeBase
 
-engine = create_engine('sqlite:///./hardware_db.db', echo=True)
+engine = create_engine('sqlite:///../hardware_db.db', echo=True)
     
 class Base(DeclarativeBase):
     pass
@@ -158,4 +158,4 @@ class PSU(Base):
     '''EVERYTHING'''
     power: Mapped[int]
 
-Base.metadata.create_all(engine)
+#Base.metadata.create_all(engine)

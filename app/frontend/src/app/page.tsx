@@ -16,26 +16,26 @@ import { Component, componentTypes } from "@/lib/types"
 import { toast } from "sonner"
 import { fetchCompatible, PCConfiguration } from "@/lib/api"
 
-const sampleComponents: Component[] = [
-  { id: 1, type: "cpu", name: "Intel Core i7-11700K", specs: "8 cores, 16 threads, 3.6 GHz", price: 320, recommended: true, link: "#" },
-  { id: 2, type: "cpu", name: "AMD Ryzen 5 5600X", specs: "6 cores, 12 threads, 3.7 GHz", price: 280, link: "#" },
-  { id: 10, type: "cpu", name: "AMD Ryzen 7 5800X", specs: "8 cores, 16 threads, 3.8 GHz", price: 350, link: "#" },
-  { id: 11, type: "cpu", name: "Intel Core i5-12600K", specs: "10 cores, 16 threads, 3.7 GHz", price: 290, link: "#" },
-  { id: 12, type: "cpu", name: "AMD Ryzen 9 5900X", specs: "12 cores, 24 threads, 3.7 GHz", price: 450, link: "#" },
-  { id: 13, type: "cpu", name: "Intel Core i9-12900K", specs: "16 cores, 24 threads, 3.2 GHz", price: 580, link: "#" },
-  { id: 14, type: "cpu", name: "AMD Ryzen 5 5600G", specs: "6 cores, 12 threads, 3.9 GHz", price: 260, link: "#" },
-  { id: 15, type: "cpu", name: "Intel Core i7-12700K", specs: "12 cores, 20 threads, 3.6 GHz", price: 410, link: "#" },
-  { id: 16, type: "cpu", name: "AMD Ryzen 7 5700G", specs: "8 cores, 16 threads, 3.8 GHz", price: 330, link: "#" },
-  { id: 3, type: "mb", name: "ASUS Prime B550-PLUS", specs: "ATX, AM4 socket", price: 150, link: "#" },
-  { id: 17, type: "mb", name: "MSI MAG B660 TOMAHAWK", specs: "ATX, LGA1700 socket", price: 180, link: "#" },
-  { id: 4, type: "gpu", name: "NVIDIA RTX 3080", specs: "10GB GDDR6X", price: 699, link: "#" },
-  { id: 5, type: "ram", name: "Corsair Vengeance LPX 16GB", specs: "DDR4 3200MHz", price: 80, link: "#" },
-  { id: 6, type: "storage", name: "Samsung 970 EVO Plus", specs: "1TB NVMe SSD", price: 130, link: "#" },
-  { id: 7, type: "power", name: "EVGA 600W Bronze", specs: "80+ Bronze Certification", price: 60, link: "#" },
-  { id: 8, type: "cooling", name: "Cooler Master Hyper 212", specs: "Air CPU Cooler", price: 35, link: "#" },
-  { id: 9, type: "case", name: "NZXT H510", specs: "Mid Tower, Tempered Glass", price: 70, link: "#" },
-  { id: 123, type: "case", name: "NZXT H510", price: 70, link: "#" },
-]
+// const sampleComponents: Component[] = [
+//   { id: 1, type: "cpu", name: "Intel Core i7-11700K", specs: "8 cores, 16 threads, 3.6 GHz", price: 320, recommended: true, link: "#" },
+//   { id: 2, type: "cpu", name: "AMD Ryzen 5 5600X", specs: "6 cores, 12 threads, 3.7 GHz", price: 280, link: "#" },
+//   { id: 10, type: "cpu", name: "AMD Ryzen 7 5800X", specs: "8 cores, 16 threads, 3.8 GHz", price: 350, link: "#" },
+//   { id: 11, type: "cpu", name: "Intel Core i5-12600K", specs: "10 cores, 16 threads, 3.7 GHz", price: 290, link: "#" },
+//   { id: 12, type: "cpu", name: "AMD Ryzen 9 5900X", specs: "12 cores, 24 threads, 3.7 GHz", price: 450, link: "#" },
+//   { id: 13, type: "cpu", name: "Intel Core i9-12900K", specs: "16 cores, 24 threads, 3.2 GHz", price: 580, link: "#" },
+//   { id: 14, type: "cpu", name: "AMD Ryzen 5 5600G", specs: "6 cores, 12 threads, 3.9 GHz", price: 260, link: "#" },
+//   { id: 15, type: "cpu", name: "Intel Core i7-12700K", specs: "12 cores, 20 threads, 3.6 GHz", price: 410, link: "#" },
+//   { id: 16, type: "cpu", name: "AMD Ryzen 7 5700G", specs: "8 cores, 16 threads, 3.8 GHz", price: 330, link: "#" },
+//   { id: 3, type: "mb", name: "ASUS Prime B550-PLUS", specs: "ATX, AM4 socket", price: 150, link: "#" },
+//   { id: 17, type: "mb", name: "MSI MAG B660 TOMAHAWK", specs: "ATX, LGA1700 socket", price: 180, link: "#" },
+//   { id: 4, type: "gpu", name: "NVIDIA RTX 3080", specs: "10GB GDDR6X", price: 699, link: "#" },
+//   { id: 5, type: "ram", name: "Corsair Vengeance LPX 16GB", specs: "DDR4 3200MHz", price: 80, link: "#" },
+//   { id: 6, type: "storage", name: "Samsung 970 EVO Plus", specs: "1TB NVMe SSD", price: 130, link: "#" },
+//   { id: 7, type: "power", name: "EVGA 600W Bronze", specs: "80+ Bronze Certification", price: 60, link: "#" },
+//   { id: 8, type: "cooling", name: "Cooler Master Hyper 212", specs: "Air CPU Cooler", price: 35, link: "#" },
+//   { id: 9, type: "case", name: "NZXT H510", specs: "Mid Tower, Tempered Glass", price: 70, link: "#" },
+//   { id: 123, type: "case", name: "NZXT H510", price: 70, link: "#" },
+// ]
 
 export default function PCBuilder() {
   const [selectedType, setSelectedType] = useState<string>("cpu")
@@ -80,7 +80,8 @@ export default function PCBuilder() {
     setSelectedType("cpu")
   }
 
-  const availableComponents = sampleComponents.filter(
+  // compatibleComponents
+  const availableComponents = compatibleComponents.filter(
     (component) => {
       // Don't show power supplies if not all other components are selected
       if (component.type === "power" && !allNonPowerComponentsSelected) {
@@ -165,8 +166,7 @@ export default function PCBuilder() {
 
   return (
     <div className="container mx-auto p-6 max-w-5xl">
-      <h1 className="text-3xl font-bold mb-8 text-center">PC Builder</h1>
-
+       <h1 className="text-xl font-bold text-center">Configure your own PC</h1>
       {/* Selected Components Grid */}
       <div className="grid grid-cols-2 gap-4 mb-6 ">
         {componentTypes.map((type) => {

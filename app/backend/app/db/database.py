@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 import json
 from models import CPU, Motherboard, RAM, Storage, Cooling, GraphicCard, PSU, Case
 
-DATABASE_URL = "sqlite:///./hardware_db.db"
+DATABASE_URL = "sqlite:///../hardware_db.db"
 engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
 
 session = Session(engine)
@@ -64,4 +64,4 @@ def init_db(session: Session):
                     session.add(GraphicCard(sku=product["sku"], name=product["name"], image_url=product["image"], link=offer["url"], price=offer["price"], pcie_version=specs["PCI Express versie"].split(" ")[1], length=specs["Lengte"].split(" ")[0], power_consumption=specs["Minimale voeding"].split(" ")[0]))
         session.commit()
 
-init_db(session)
+#init_db(session)
