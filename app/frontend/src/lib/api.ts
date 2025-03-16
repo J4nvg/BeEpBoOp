@@ -2,10 +2,10 @@ import { FastApiLink } from "./constants";
 import { componentTypes } from "./types";
 
 export interface PCConfiguration {
-  cpu: string;
-  case: string;
-  psu: string;
-  [key: string]: string;
+  cpu: number;
+  case: number;
+  psu: number;
+  [key: string]: number;
 }
 
 export async function fetchCompatible(
