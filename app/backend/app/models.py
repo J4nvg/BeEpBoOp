@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, field_validator
 from typing import List
     
 class ComputerPart(BaseModel):
@@ -27,11 +27,8 @@ class Memory_response(ComputerPart):
     XMP_support: bool
     AMDexpo_support: bool
 
-class Storage(ComputerPart):
-    capacity: int
-    speed: int
-    cache: int
-    form_factor: str
+class Storage_response(ComputerPart):
+    storage_type: str
 
 class Motherboard(ComputerPart):
     socket: str
@@ -45,12 +42,25 @@ class Cooler(ComputerPart):
     fan_size: int
     radiator_size: int
 
-class GPU(ComputerPart):
-    chipset: str
-    memory: int
-    core_clock: int
-    boost_clock: int
-    TDP: int
+class GPU_response(ComputerPart):
+    pcie_version: int
+    power_consumption: int
+    length: int 
+
+    @field_validator('length', mode='before')
+    @classmethod
+    def convert_length(cls, v):
+        if isinstance(v, str):
+            v = v.replace(",", ".")  
+            try:
+                return int(float(v)) 
+            except ValueError:
+                raise ValueError("Invalid type for length, must be an integer or numeric string")
+        elif isinstance(v, (int, float)):
+            return int(v)  
+        raise ValueError("Invalid type for length, must be an integer or numeric string")
+
+
 
 class PSU(ComputerPart):
     wattage: int

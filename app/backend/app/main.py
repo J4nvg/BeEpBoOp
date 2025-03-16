@@ -1,5 +1,5 @@
 
-from models import ComputerParts, Storage, CPU_response, Memory, Motherboard, Cooler, GPU, PSU, Case
+from models import ComputerParts, Storage_response, CPU_response, Memory_response, Motherboard, Cooler, GPU_response, PSU, Case
 
 import sqlalchemy as db
 from sqlalchemy import select
@@ -130,32 +130,93 @@ def memory(build: Build):
     }
 
 
-@app.get("/storage", response_model=ComputerParts)
-def disk():
-    return {"name": "storages", "data": []}
+@app.post("/storage", response_model=ComputerParts)
+def disk(build: Build):
+    disk_query = select(Storage)
+
+    if build.mb:
+        mb_query = select(Motherboard).where(Motherboard.sku == build.mb).one()
+        mb = session.scalars(mb_query).one_or_none()
+        if mb:
+            disk_query = disk_query.where(
+                Storage.storage_type == mb.storage_type
+            )
+    
+    disks = session.scalars(disk_query).all()
+
+    final_list = [Storage_response(
+        name = disk.name,
+        price = disk.price,
+        SKU = disk.sku,
+        image_url = disk.image_url,
+        link = disk.link,
+        storage_type = disk.storage_type
+    ) for disk in disks]
+
+    return {
+        "message": "storages", 
+        "data": final_list
+    }
 
 
-@app.get("/mb", response_model=ComputerParts)
-def mb():
+@app.post("/mb", response_model=ComputerParts)
+def mb(build: Build):
     return {"name": "motherboards", "data": []}
 
 
-@app.get("/cooler", response_model=ComputerParts)
+@app.post("/cooler", response_model=ComputerParts)
 def cooler():
     return {"name": "coolers", "data": []}
 
 
-@app.get("/gpu", response_model=ComputerParts)
-def gpu():
-    return {"name": "gpus", "data": []}
+@app.post("/gpu", response_model=ComputerParts)
+def gpu(build: Build):
+    gpu_query = select(GraphicCard)
+
+    if build.mb:
+        mb_query = select(Motherboard).where(Motherboard.sku == build.mb)
+        mb = session.scalars(mb_query).one_or_none()
+        if mb:
+            if mb.pcie5_slots >= 0:
+                pcie_version = 5
+            elif mb.pcie4_x16 >= 0 or mb.pcie4_x4 >= 0:
+                pcie_version = 4
+            gpu_query = gpu_query.where(
+                GraphicCard.pcie_version == pcie_version
+            )
+    if build.case:
+        case_query = select(Case).where(Case.sku == build.case)
+        case = session.scalars(case_query).one_or_none()
+        if case:
+            gpu_query = gpu_query.where(
+                GraphicCard.length <= case.max_gpu_size
+            )
+    
+    gpus = session.scalars(gpu_query).all()
+
+    final_list = [GPU_response(
+        name = gpu.name,
+        price = gpu.price,
+        SKU = gpu.sku,
+        image_url = gpu.image_url,
+        link = gpu.link,
+        pcie_version = gpu.pcie_version,
+        power_consumption = gpu.power_consumption,
+        length = gpu.length
+    ) for gpu in gpus]
+
+    return {
+        "message": "gpus", 
+        "data": final_list
+    }
 
 
-@app.get("/psu", response_model=ComputerParts)
+@app.post("/psu", response_model=ComputerParts)
 def psu():
     return {"name": "psus", "data": []}
 
 
-@app.get("/case", response_model=ComputerParts)
+@app.post("/case", response_model=ComputerParts)
 def case():
     return {"name": "cases", "data": []}
 

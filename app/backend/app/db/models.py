@@ -36,7 +36,7 @@ class GraphicCard(Base):
     link: Mapped[str]
     image_url: Mapped[str]
     '''MOTHERBOARD'''
-    pcie_version: Mapped[float]
+    pcie_version: Mapped[int]
     '''PSU (WATTS)'''
     power_consumption: Mapped[int]
     '''LENGTH (MMS)'''
