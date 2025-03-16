@@ -1,9 +1,11 @@
 from app.models import ComputerParts, Storage, CPU, Memory, Motherboard, Cooler, GPU, PSU, Case
 import sqlalchemy as db
-from fastapi import FastAPI, Depends, HTTPException
+from fastapi import FastAPI, Depends, HTTPException, Body
 from sqlalchemy.orm import Session
 from db.models import *
 from db.database import SessionLocal
+from chatbot import run_initial_welcome, process_message
+from pydantic import BaseModel
 
 app = FastAPI()
 
@@ -74,3 +76,16 @@ def psu(db: Session = Depends(get_db)):
 @app.get("/case", response_model=ComputerParts)
 def case(db: Session = Depends(get_db)):
     return {"name": "Case", "data": []}
+
+class ChatMessage(BaseModel):
+    message: str
+
+@app.get("/welcome")
+def welcome():
+    welcome_text = run_initial_welcome()
+    return {"assistant_response": welcome_text}
+
+@app.post("/chat")
+def chat_endpoint(chat: ChatMessage):
+    response_text = process_message(chat.message)
+    return {"assistant_response": response_text}
