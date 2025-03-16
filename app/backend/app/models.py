@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from typing import List
-
+    
 class ComputerPart(BaseModel):
     name: str
     price: float
