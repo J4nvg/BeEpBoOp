@@ -31,8 +31,6 @@ def scrape_megekko(url):
         print("No subcategories found, stopping scraping")
 
     for subcategory in subcateogries:
-        product_data = {}
-
         link = subcategory.find("a")
 
         url = BASE_URL + link["href"] if link and link.has_attr("href") else None
@@ -46,7 +44,7 @@ def scrape_megekko(url):
 
 
         for prod in product_elements:
-
+            product_data = {}
             # Extract metadata
             meta_tags = ["sku", "image", "name"]
             for tag in meta_tags:
