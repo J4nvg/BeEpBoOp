@@ -29,7 +29,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="px-10 bg-neutral-200 w-full h-[100px] flex flex-row items-center">
+        <div className="px-10 bg-neutral-400 w-full h-[100px] flex flex-row items-center">
         <Image
         src="/megekkoLogo2021.svg"
         width={500}

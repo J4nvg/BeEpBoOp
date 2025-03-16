@@ -7,12 +7,12 @@ import {
   Plus,
   Minus,
   X,
-  FlameIcon,
+  // FlameIcon,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import Link from "next/link"
-import { Component, componentTypes } from "@/lib/types" 
+import { Component_final, componentTypes } from "@/lib/types" 
 import { toast } from "sonner"
 import { fetchCompatible, PCConfiguration } from "@/lib/api"
 
@@ -39,7 +39,7 @@ import { fetchCompatible, PCConfiguration } from "@/lib/api"
 
 export default function PCBuilder() {
   const [selectedType, setSelectedType] = useState<string>("cpu")
-  const [selectedComponents, setSelectedComponents] = useState<Record<string, Component | null>>({
+  const [selectedComponents, setSelectedComponents] = useState<Record<string, Component_final | null>>({
     cpu: null,
     motherboard: null,
     gpu: null,
@@ -50,34 +50,36 @@ export default function PCBuilder() {
     power: null,
   })
   const [searchQuery, setSearchQuery] = useState<string>("")
-  const [compatibleComponents, setCompatibleComponents] = useState<Component[]>([])
+  const [compatibleComponents, setCompatibleComponents] = useState<Component_final[]>([])
   const nonPowerComponentTypes = componentTypes.filter(type => type.id !== "power")
   const allNonPowerComponentsSelected = nonPowerComponentTypes.every(type => 
     selectedComponents[type.id] !== null
   )
 
   useEffect(() => {
-    const configuration: Partial<PCConfiguration> = {};
+    const configuration: Partial<PCConfiguration> = {}
+    // Use the component SKU as the identifier
     Object.keys(selectedComponents).forEach((key) => {
       if (selectedComponents[key]) {
-        configuration[key] = selectedComponents[key]!.id;
+        configuration[key] = selectedComponents[key]!.SKU
       }
-    });
-  
+    })
+
     if (selectedType) {
       fetchCompatible(configuration as PCConfiguration, selectedType)
         .then((data) => {
-          setCompatibleComponents(data);
+          console.log(data)
+          setCompatibleComponents(data)
         })
         .catch((error) => {
-          console.error("Error fetching compatible components:", error);
-        });
+          console.error("Error fetching compatible components:", error)
+        })
     }
-  }, [selectedType, selectedComponents]);
+  }, [selectedType, selectedComponents])
 
   // If power supply is selected but not all other components are selected, switch to CPU tab
   if (selectedType === "power" && !allNonPowerComponentsSelected) {
-    setSelectedType("cpu")
+    setSelectedType("cpus")
   }
 
   // compatibleComponents
@@ -89,12 +91,11 @@ export default function PCBuilder() {
       }
       
       return component.type === selectedType &&
-        (component.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          component.specs?.toLowerCase().includes(searchQuery.toLowerCase()))
+        (component.name.toLowerCase().includes(searchQuery.toLowerCase()))
     }
   )
 
-  const addToBuild = (component: Component) => {
+  const addToBuild = (component: Component_final) => {
     if (component.type !== "power" && selectedComponents["power"] !== null){
       setSelectedComponents({
         ...selectedComponents,
@@ -131,8 +132,8 @@ export default function PCBuilder() {
     }
   }
 
-  const isComponentSelected = (component: Component) => {
-    return selectedComponents[component.type]?.id === component.id
+  const isComponentSelected = (component: Component_final) => {
+    return selectedComponents[component.type]?.SKU === component.SKU
   }
 
   const totalPrice = Object.values(selectedComponents)
@@ -147,7 +148,7 @@ export default function PCBuilder() {
     console.log("Checkout with the following components:")
     Object.entries(selectedComponents).forEach(([type, component]) => {
       if (component) {
-        console.log(`${type}: ${component.name} (ID: ${component.id})`)
+        console.log(`${type}: ${component.name} (ID: ${component.SKU})`)
       }
     })
   }
@@ -303,31 +304,31 @@ export default function PCBuilder() {
 
             return (
               <Card
-                key={component.id}
+                key={component.SKU}
                 className={`hover:border-[#8CD50B] transition-colors ${isSelected ? "border-[#8CD50B]" : ""}`}
               >
                 <CardHeader>
-                  <div className="flex justify-end text-[#8CD50B]">
+                  {/* <div className="flex justify-end text-[#8CD50B]">
                     {component.recommended ? (
                       <span className="flex items-baseline">
                         Recommended <FlameIcon className="ml-1" />
                       </span>
                     ) : null}
-                  </div>
+                  </div> */}
                 </CardHeader>
                 <CardContent className="flex items-center p-4">
                   <div className="w-20 h-20 bg-gray-200 rounded flex items-center justify-center mr-4">
-                    {/* <img
-                      src={component.imageUrl || "/placeholder.svg?height=80&width=80"}
+                    <img
+                      src={"https://www.megekko.nl/" + component.image_url}
                       alt={component.name}
                       className="w-16 h-16 object-contain"
-                    /> */}
+                    />
                   </div>
                   <div className="flex-1">
                     <Link href={component.link}>
                       <h3 className="font-semibold">{component.name}</h3>
                     </Link>
-                    <p className="text-sm text-gray-600">{component.specs}</p>
+                    {/* <p className="text-sm text-gray-600">{component.specs}</p> */}
                   </div>
                   <div className="text-lg font-bold text-[#8CD50B]">${component.price.toFixed(2)}</div>
                 </CardContent>
