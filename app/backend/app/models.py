@@ -11,7 +11,7 @@ class ComputerParts(BaseModel):
     message: str
     data: List[ComputerPart] = []
 
-class CPU(ComputerPart):
+class CPU_response(ComputerPart):
     cores: int
     threads: int
     base_clock: float
