@@ -167,7 +167,7 @@ export default function PCBuilder() {
 
   return (
     <div className="container mx-auto p-6 max-w-5xl">
-       <h1 className="text-xl font-bold text-center">Configure your own PC</h1>
+       <h1 className="text-xl mb-2 font-bold text-center">Configure your own PC</h1>
       {/* Selected Components Grid */}
       <div className="grid grid-cols-2 gap-4 mb-6 ">
         {componentTypes.map((type) => {

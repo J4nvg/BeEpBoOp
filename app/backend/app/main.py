@@ -1,6 +1,6 @@
 
-from models import ComputerParts, Storage, CPU_response, Memory, Motherboard, Cooler, GPU, PSU, Case
-
+from models import ComputerParts, Storage, CPU_response, Memory_response, Motherboard, Cooler, GPU, PSU, Case
+from chatbot import run_initial_welcome, process_message
 import sqlalchemy as db
 from sqlalchemy import select
 from sqlalchemy.orm import Session
@@ -10,6 +10,10 @@ from fastapi import FastAPI, Depends, HTTPException, Request, Body
 from request_model import Build
 from fastapi.middleware.cors import CORSMiddleware
 from db.models import *
+
+
+class ChatMessage(BaseModel):
+    message: str
 
 app = FastAPI()
 
@@ -159,3 +163,12 @@ def psu():
 def case():
     return {"name": "cases", "data": []}
 
+@app.get("/welcome")
+def welcome():
+    welcome_text = run_initial_welcome()
+    return {"assistant_response": welcome_text}
+
+@app.post("/chat")
+def chat_endpoint(chat: ChatMessage):
+    response_text = process_message(chat.message)
+    return {"assistant_response": response_text}

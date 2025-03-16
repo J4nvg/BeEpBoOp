@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
 import Image from "next/image";
+import { ChatInterface } from "@/components/chatbot";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -40,6 +41,7 @@ export default function RootLayout({
         <h1 className="text-1xl font-mono text-white mb-8 text-center">PC Builder</h1>
         </div>
         {children}
+        <ChatInterface/>
         <Toaster />
       </body>
     </html>

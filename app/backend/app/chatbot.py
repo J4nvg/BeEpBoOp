@@ -48,7 +48,7 @@ class CaptureEventHandler(AssistantEventHandler):
         self.result = ""
     
     def on_text_created(self, text) -> None:
-        self.result += "\nassistant > "
+        self.result += "\n "
       
     def on_text_delta(self, delta, snapshot):
         self.result += delta.value
@@ -78,7 +78,7 @@ def run_initial_welcome() -> str:
         instructions=(
             "Please start the conversation by greeting the user. "
             "Introduce yourself as Tecco and explain that you are a technical assistant who helps users build personal computers "
-            "by providing component recommendations."
+            "by providing component recommendations. Make sure not to return Markdown language."
         ),
         event_handler=handler,
     ) as stream:
